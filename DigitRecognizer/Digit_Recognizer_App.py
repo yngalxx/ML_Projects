@@ -2,7 +2,7 @@ import matplotlib.pyplot as pt
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-data=pd.read_csv("/Users/alexdrozdz/PycharmProjects/DigitRecognizerAPP/all3/train.csv").values
+data=pd.read_csv("path").values
 
 rfc=RandomForestClassifier()
 
