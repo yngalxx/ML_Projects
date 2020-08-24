@@ -1,28 +1,23 @@
+# my first ever machine learning program
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
 
-data=pd.read_csv("path").values
+train = pd.read_csv("/Users/alexdrozdz/Desktop/train.csv")
 
-rfc=RandomForestClassifier()
+X, y = train.iloc[:, 1:], train.iloc[:, 0]
 
-# train set:
-x=data[0:33600, 1:]
-y=data[0:33600, 0]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=1000)
+
+randomForest=RandomForestClassifier()
 
 # train basic random forest model
-rfc.fit(x, y)
+randomForest.fit(X_train, y_train)
 
-# prediction
-test=data[33600:,1:]
-y_test=data[33600:, 0]
-
-p=rfc.predict(test)
-count=0
-i=1
-while i<8400:
-    count+=1 if p[i]==actual_label[i] else 0
-    i=i+1
-print("Program provides with ", (count/8400)*100,"% accuracy")
-
-# accuracy was 85% or sth like this 
+y_pred = randomForest.predict(X_test)
+print('Accuracy: ' + str(round(accuracy_score(y_test, y_pred), 3)*100) + '%')
+# this basic model provides 96% of accuracy
